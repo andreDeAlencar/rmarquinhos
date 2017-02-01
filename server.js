@@ -45,6 +45,13 @@ bot.onText(/\/dado/, function (msg) {
   bot.sendMessage(chatId, diceNumber);
 });
 
+bot.onText(/\/oxe/, function (msg) {
+  var chatId = msg.chat.id;
+  var text = "mainha";
+  
+  bot.sendMessage(chatId, text);
+});
+
 // Listen for any kind of message. There are different kinds of
 // messages.
 /*

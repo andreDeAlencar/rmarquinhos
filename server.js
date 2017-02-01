@@ -69,7 +69,7 @@ bot.on('inline_query', function (msg) {
   var query_text = msg.query;
   var result = [];
   
-  swtich (query_text) {
+  switch (query_text) {
     case "teste":
       result.push("ok", "nok", "hehe");
       break;

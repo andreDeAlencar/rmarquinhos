@@ -63,7 +63,7 @@ bot.onText(/\/soletre (.+)/, function (msg, match) {
   }
   bot.sendMessage(chatId, spelled);
 });
-
+/*
 bot.on('inline_query', function (msg) {
   var query_id = msg.id;
   var query_text = msg.query;

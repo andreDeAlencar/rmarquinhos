@@ -15,5 +15,5 @@
 	"repository": {
 		"type" : "git",
 		"git": "https://github.com/andreDeAlencar/rmarquinhos.git"
-	},
+	}
 }

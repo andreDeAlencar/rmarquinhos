@@ -64,7 +64,22 @@ bot.onText(/\/soletre (.+)/, function (msg, match) {
   bot.sendMessage(chatId, spelled);
 });
 
-bot.answerInlineQuery("teste", ["ok", "nok"]);
+bot.on('inline_query', function (msg) {
+  var query_id = msg.id;
+  var query_text = msg.query;
+  var result = [];
+  
+  swtich (query_text) {
+    case "teste":
+      result.push("ok", "nok", "hehe");
+      break;
+    default:
+      result.push("catchau");
+  }
+  
+  bot.answerInlineQuery(query_id, result);
+});
+
 
 // Listen for any kind of message. There are different kinds of
 // messages.

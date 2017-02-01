@@ -64,6 +64,8 @@ bot.onText(/\/soletre (.+)/, function (msg, match) {
   bot.sendMessage(chatId, spelled);
 });
 
+bot.answerInlineQuery("teste", ["ok", "nok"]);
+
 // Listen for any kind of message. There are different kinds of
 // messages.
 /*

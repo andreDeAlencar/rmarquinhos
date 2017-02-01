@@ -55,10 +55,13 @@ bot.onText(/\/oxe/, function (msg) {
 bot.onText(/\/soletre (.+)/, function (msg, match) {
   var chatId = msg.chat.id;
   var resp = match[1];
+  var spelled = resp.charAt(0);
+  var blank = ' ';
   
-  for (var i = 0; i < resp.length; i++) {
-    bot.sendMessage(chatId, resp.charAt(i));
+  for (var i = 1; i < resp.length; i++) {
+    spelled += blank + resp.charAt(i);   
   }
+  bot.sendMessage(chatId, spelled);
 });
 
 // Listen for any kind of message. There are different kinds of

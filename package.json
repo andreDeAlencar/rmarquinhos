@@ -1,11 +1,4 @@
 {
-	1 describes your app and its dependencies,
-	2 httpsdocs.npmjs.comfilespackage.json,
-	3 updating this file will download and update your packages,
-	name my-gomix-app,
-	version 0.0.1,
-	description What am I about,
-	main server.js,
 	scripts {
 		start node server.js
 	},

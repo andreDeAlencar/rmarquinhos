@@ -94,7 +94,7 @@ bot.onText(/\/selic (.+)/, function (msg, match) {
     if (!error && response.statusCode === 200) {
 			console.log("if ok");
 			for (var i = 0; i < body.length; i++) {
-				result += "data: " + body[i].data + "valor: " + body[i].valor + "\n";
+				result += "data: " + body[i].data + "\nvalor: " + body[i].valor + "\n\n";
 			}
 			 bot.sendMessage(chatId, result);
     } else {

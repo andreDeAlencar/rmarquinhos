@@ -97,13 +97,15 @@ bot.onText(/\/selic (.+)/, function (msg, match) {
 			for (var i = 0; i < info.length; i++) {
 				result += "data: " + info[i].data + "valor: " + info[i].valor + "\n";
 			}
+			 bot.sendMessage(chatId, result);
     } else {
 			console.log("else ok");
 			result = "Falha";
+			bot.sendMessage(chatId, result);
 	}
   });
   
-  bot.sendMessage(chatId, result);
+ 
   
 });
 

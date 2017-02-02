@@ -83,6 +83,7 @@ bot.onText(/\/soletre (.+)/, function (msg, match) {
 bot.onText(/\/selic (.+)/, function (msg, match) {
   var chatId = msg.chat.id;
   var resp = match[1] || 1;
+  console.log(resp);
   var result = "";
   
   request({

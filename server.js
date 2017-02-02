@@ -3,8 +3,9 @@
 
 // init project
 var express = require('express');
+var request = require('request');
 var app = express();
-var $ = require("jquery");
+
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -83,11 +84,17 @@ bot.onText(/\/selic (.+)/, function (msg, match) {
   var chatId = msg.chat.id;
   var resp = match[1] || 1;
   var result = "";
+  
+  request({
+    url: 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/' + resp +'?formato=json',
+    json: true
+  }, function (error, response, body) {
 
-  $.getJSON('http://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/' + resp +'?formato=json', function(data) {
-    for (var i = 0; i < data.length; i++) {
-		result += "data: " + data[i].data + "valor: " + data[i].valor + "\n";
-	}
+    if (!error && response.statusCode === 200) {
+			for (var i = 0; i < body.length; i++) {
+				result += "data: " + body[i].data + "valor: " + body[i].valor + "\n";
+			}
+    }
   });
   
   bot.sendMessage(chatId, result);

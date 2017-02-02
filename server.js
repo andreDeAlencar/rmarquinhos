@@ -93,7 +93,7 @@ bot.onText(/\/selic (.+)/, function (msg, match) {
 
     if (!error && response.statusCode === 200) {
 			console.log("if ok");
-			var info = JSON.stringify(body);
+			var info = JSON.parse(body);
 			for (var i = 0; i < info.length; i++) {
 				result += "data: " + info[i].data + "valor: " + info[i].valor + "\n";
 			}

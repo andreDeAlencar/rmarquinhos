@@ -94,7 +94,9 @@ bot.onText(/\/selic (.+)/, function (msg, match) {
 			for (var i = 0; i < body.length; i++) {
 				result += "data: " + body[i].data + "valor: " + body[i].valor + "\n";
 			}
-    }
+    } else {
+			result = "Falha";
+	}
   });
   
   bot.sendMessage(chatId, result);

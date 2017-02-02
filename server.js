@@ -84,7 +84,7 @@ bot.onText(/\/selic (.+)/, function (msg, match) {
   var resp = match[1] || 1;
   var result = "";
 
-  $.getJSON('http://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/' + resp +'?formato=json', function(data) {
+  $.get('http://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/' + resp +'?formato=json', function(data) {
     for (var i = 0; i < data.length; i++) {
 		result += "data: " + data[i].data + "valor: " + data[i].valor + "\n";
 	}

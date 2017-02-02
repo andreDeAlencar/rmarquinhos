@@ -30,6 +30,23 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function getJSONP(url, success) {
+
+    var ud = '_' + +new Date,
+        script = document.createElement('script'),
+        head = document.getElementsByTagName('head')[0] 
+               || document.documentElement;
+
+    window[ud] = function(data) {
+        head.removeChild(script);
+        success && success(data);
+    };
+
+    script.src = url.replace('callback=?', 'callback=' + ud);
+    head.appendChild(script);
+
+}
+
 var TelegramBot = require('node-telegram-bot-api');
 
 // replace the value below with the Telegram token you receive from @BotFather
@@ -76,6 +93,22 @@ bot.onText(/\/soletre (.+)/, function (msg, match) {
   }
   bot.sendMessage(chatId, spelled);
 });
+
+bot.onText(/\/selic (.+)/, function (msg, match) {
+  var chatId = msg.chat.id;
+  var resp = match[1] || 1;
+  var result = "";
+
+  getJSONP('http://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/' + resp +'?formato=json', function(data) {
+    for (var i = 0; i < data.length; i++) {
+		result += "data: " + data[i].data + "valor: " + data[i].valor + "\n";
+	}
+  });
+  
+  bot.sendMessage(chatId, result);
+  
+});
+
 /*
 bot.on('inline_query', function (msg) {
   var query_id = msg.id;

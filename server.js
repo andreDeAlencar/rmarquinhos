@@ -2,6 +2,7 @@
 // where your node app starts
 
 // init project
+var $ = require('jquery');
 var express = require('express');
 var app = express();
 
@@ -30,22 +31,6 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getJSONP(url, success) {
-
-    var ud = '_' + +new Date,
-        script = document.createElement('script'),
-        head = document.getElementsByTagName('head')[0] 
-               || document.documentElement;
-
-    window[ud] = function(data) {
-        head.removeChild(script);
-        success && success(data);
-    };
-
-    script.src = url.replace('callback=?', 'callback=' + ud);
-    head.appendChild(script);
-
-}
 
 var TelegramBot = require('node-telegram-bot-api');
 
@@ -99,7 +84,7 @@ bot.onText(/\/selic (.+)/, function (msg, match) {
   var resp = match[1] || 1;
   var result = "";
 
-  getJSONP('http://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/' + resp +'?formato=json', function(data) {
+  $.getJSON('http://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/' + resp +'?formato=json', function(data) {
     for (var i = 0; i < data.length; i++) {
 		result += "data: " + data[i].data + "valor: " + data[i].valor + "\n";
 	}

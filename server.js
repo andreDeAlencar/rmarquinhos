@@ -108,6 +108,34 @@ bot.onText(/\/selic (.+)/, function (msg, match) {
   
 });
 
+bot.onText(/\/selic/, function (msg) {
+  var chatId = msg.chat.id;
+  var resp = 1;
+  console.log('resp: ' + resp);
+  var result = "";
+  
+  request({
+    url: 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/' + resp +'?formato=json',
+    json: true
+  }, function (error, response, body) {
+
+    if (!error && response.statusCode === 200) {
+			console.log("if ok");
+			for (var i = 0; i < body.length; i++) {
+				result += "data: " + body[i].data + "\nvalor: " + body[i].valor + "\n\n";
+			}
+			 bot.sendMessage(chatId, result);
+    } else {
+			console.log("else ok");
+			result = "Falha";
+			bot.sendMessage(chatId, result);
+	}
+  });
+  
+ 
+  
+});
+
 /*
 bot.on('inline_query', function (msg) {
   var query_id = msg.id;

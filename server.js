@@ -83,7 +83,7 @@ bot.onText(/\/soletre (.+)/, function (msg, match) {
 bot.onText(/\/selic (.+)/, function (msg, match) {
   var chatId = msg.chat.id;
   var resp = match[1] || 1;
-  console.log(resp);
+  console.log('resp: ' + resp);
   var result = "";
   
   request({
@@ -92,10 +92,12 @@ bot.onText(/\/selic (.+)/, function (msg, match) {
   }, function (error, response, body) {
 
     if (!error && response.statusCode === 200) {
+			console.log("if ok");
 			for (var i = 0; i < body.length; i++) {
 				result += "data: " + body[i].data + "valor: " + body[i].valor + "\n";
 			}
     } else {
+			console.log("else ok");
 			result = "Falha";
 	}
   });

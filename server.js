@@ -2,9 +2,9 @@
 // where your node app starts
 
 // init project
-var $ = require('jquery');
 var express = require('express');
 var app = express();
+var $ = require("jquery");
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -84,7 +84,7 @@ bot.onText(/\/selic (.+)/, function (msg, match) {
   var resp = match[1] || 1;
   var result = "";
 
-  $.get('http://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/' + resp +'?formato=json', function(data) {
+  $.getJSON('http://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/' + resp +'?formato=json', function(data) {
     for (var i = 0; i < data.length; i++) {
 		result += "data: " + data[i].data + "valor: " + data[i].valor + "\n";
 	}
